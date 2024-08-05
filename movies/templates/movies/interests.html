@@ -1,0 +1,27 @@
+{% block body %}
+<h3 align="center"><b>Select Genres</b></h3>
+{% if error_message %}
+<p style="color:red"><strong>{{ error_message }} </strong></p>
+{% endif %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-body">
+<form action="{% url  'movies:reg_home' %}" method="post">
+     {% csrf_token %}
+    {{ genreform.as_p }}
+
+
+    <p><input type="submit" value="Finish" /></p>
+</form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+

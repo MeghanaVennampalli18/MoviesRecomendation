@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}MRS{% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="shortcut icon" type="image/png" href="{%  static 'tempicon.ico' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'movies/style.css' %}" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{% static 'movies/js/main.js' %}"></script>
+
+</head>
+
+<body>
+	<header role="banner">
+		<div id="cd-logo"><a href="#0"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/cd-logo_1.svg" alt="Logo"></a></div>
+
+		<nav class="main-nav">
+			<ul>
+				<!-- inser more links here -->
+				<li><a class="cd-signin" href="#0">Sign in</a></li>
+				<li><a class="cd-signup" href="#0">Sign up</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<div class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
+		<div class="cd-user-modal-container"> <!-- this is the container wrapper -->
+			<ul class="cd-switcher">
+				<li><a href="#0">Sign in</a></li>
+				<li><a href="#0">New account</a></li>
+			</ul>
+
+			<div id="cd-login"> <!-- log in form -->
+				<form class="cd-form" action="{% url 'movies:login_user' %}" method="post">
+                    {% csrf_token %}
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+
+    					<script src="{% static 'movies/js/main.js' %}">
+							this.login_selected();
+						</script>
+
+                    {% endif %}
+					<p class="fieldset">
+						<label class="image-replace cd-email" for="signin-email">E-mail/Username</label>
+						<input name="user_field" class="full-width has-padding has-border" id="signin-email" type="text" placeholder="Username/E-mail">
+						<span class="cd-error-message">{{ error_message }}</span>
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signin-password">Password</label>
+						<input name="pass_field" class="full-width has-padding has-border" id="signin-password" type="password"  placeholder="Password">
+						<a href="#0" class="hide-password">Hide</a>
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+
+					<p class="fieldset">
+						<input class="full-width" type="submit" value="Login">
+					</p>
+				</form>
+
+				<p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
+				<!-- <a href="#0" class="cd-close-form">Close</a> -->
+			</div> <!-- cd-login -->
+
+			<div id="cd-signup"> <!-- sign up form -->
+				{% if error %}
+        			<p style="color: red;">
+            			Please submit a search term 20 characters or shorter.
+        			</p>
+    			{% endif %}
+				<form class="cd-form" action="{% url 'movies:signup' %}" method="post">
+                    {% csrf_token %}
+
+					<p class="fieldset">
+						<label class="image-replace cd-username" for="signup-username">Username</label>
+						<input name="username_reg" class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username">
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-email" for="signup-email">E-mail</label>
+						<input  name="email_reg" class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signup-password">Password</label>
+						<input name="pass_reg" class="full-width has-padding has-border" id="signup-password" type="password"  placeholder="Password">
+						<a href="#0" class="hide-password">Hide</a>
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+
+
+					<p class="fieldset">
+						<input class="full-width has-padding" type="submit" value="Create account">
+					</p>
+				</form>
+
+				<!-- <a href="#0" class="cd-close-form">Close</a> -->
+			</div> <!-- cd-signup -->
+
+			<div id="cd-reset-password"> <!-- reset password form -->
+				<p class="cd-form-message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
+
+				<form class="cd-form">
+					<p class="fieldset">
+						<label class="image-replace cd-email" for="reset-email">E-mail</label>
+						<input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<input class="full-width has-padding" type="submit" value="Reset password">
+					</p>
+				</form>
+
+				<p class="cd-form-bottom-message"><a href="#0">Back to log-in</a></p>
+			</div> <!-- cd-reset-password -->
+			<a href="#0" class="cd-close-form">Close</a>
+		</div> <!-- cd-user-modal-container -->
+	</div> <!-- cd-user-modal -->
+</body>
+<!--<body>-->
+
+
+
+<!--<nav class="navbar navbar-inverse">-->
+  <!--<div class="container-fluid">-->
+    <!--<div class="navbar-header">-->
+      <!--<a class="navbar-brand" href="{% url 'movies:home' %}">MRS</a>-->
+    <!--</div>-->
+    <!--<div class="collapse navbar-collapse" id="topNavBar">-->
+            <!--<ul class="nav navbar-nav">-->
+                <!--<li class="{% block register_active %}{% endblock %}"><a href="{% url 'movies:signup' %}">SignUp</a></li>-->
+                <!--<li class="{% block login_active %}{% endblock %}"><a href="{% url 'movies:login_user' %}">Log In</a></li>-->
+            <!--</ul>-->
+    <!--</div>-->
+
+
+  <!--</div>-->
+<!--</nav>-->
+<!--{% block body %}-->
+<!--{% endblock %}-->
+<!--</body>-->
+</html>
